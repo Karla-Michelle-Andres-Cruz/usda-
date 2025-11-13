@@ -8,6 +8,7 @@ API_BASE = "https://api.nal.usda.gov/fdc/v1/"
 API_KEY = "DEMO_KEY"  # <-- pon aquí tu propia API key si la tienes
 
 
+
 @app.route("/")
 def index():
     return render_template("inicio.html")
