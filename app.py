@@ -5,7 +5,7 @@ app = Flask(__name__)
 app.secret_key = 'TIAMIOSSOTT12'
 
 API_BASE = "https://api.nal.usda.gov/fdc/v1/"
-API_KEY = "DEMO_KEY"  # <-- pon aquí tu propia API key si la tienes
+API_KEY = "DEMO_KEY"
 
 
 
@@ -23,20 +23,20 @@ def buscar_alimento():
         return redirect(url_for("index"))
 
     try:
-        search_url = f"{API_BASE}foods/search?query={food_name}&api_key={API_KEY}"
-        search_response = requests.get(search_url)
+        buscaUrl = f"{API_BASE}foods/search?query={food_name}&api_key={API_KEY}"
+        busResponse = requests.get(search_url)
 
-        if search_response.status_code != 200:
+        if busResponse.status_code != 200:
             flash("No se pudo conectar con la API del USDA.", "error")
             return redirect(url_for("index"))
 
-        search_data = search_response.json()
+        busData = busResponse.json()
 
-        if "foods" not in search_data or len(search_data["foods"]) == 0:
+        if "foods" not in busData or len(busData["foods"]) == 0:
             flash(f'No se encontraron resultados para "{food_name}".', "error")
             return redirect(url_for("index"))
 
-        food = search_data["foods"][0]
+        food = busData["foods"][0]
         fdc_id = food["fdcId"]
 
         detail_url = f"{API_BASE}food/{fdc_id}?api_key={API_KEY}"
@@ -65,3 +65,4 @@ def buscar_alimento():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
