@@ -47,13 +47,14 @@ def buscar_alimento():
             "description": detData.get("description", "Sin descripción"),
             "fdcId": detData.get("fdcId"),
             "nutrientes": [
-        {
-            "name": n.get("nutrientName", ""),
-            "amount": n.get("value"),
-            "unit": n.get("unitName", "")
-        }
-        for n in detData.get("foodNutrients", [])
-    ]
+                {
+                    "name": n.get("nutrientName", ""),
+                    "amount": n.get("value"),
+                    "unit": n.get("unitName", "")
+                }
+            for n in detData.get("foodNutrients", [])
+            ]
+
 }
 
 
